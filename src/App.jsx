@@ -3,7 +3,7 @@ import Home from './components/Home';
 import Learn from './components/Learn';
 import Stitch from './components/Stitch';
 import Upcycle from './components/Upcycle'; 
-import Minigame from './components/minigame';
+import Minigame from './components/Minigame';
 import NavBar from './components/NavBar';
 
 function App(){
@@ -15,6 +15,7 @@ function App(){
         <Route path='/learn' element={<Learn />} />
         <Route path='/stitch' element={<Stitch />} />
         <Route path='/upcycle' element={<Upcycle />} />
+        <Route path='/minigame' element={<Minigame />} />
       </Routes>
     </Router>
   )
