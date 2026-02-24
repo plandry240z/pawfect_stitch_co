@@ -3,6 +3,7 @@ import Home from './components/Home';
 import Learn from './components/Learn';
 import Stitch from './components/Stitch';
 import Upcycle from './components/Upcycle'; 
+import Minigame from './components/minigame';
 import NavBar from './components/NavBar';
 
 function App(){
