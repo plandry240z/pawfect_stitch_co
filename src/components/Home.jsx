@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/home.css';
 import "../index.css";
+import gray_cat from "../images/gray_cat.png";
 import { Link } from 'react-router-dom';
 
 export default function HomePage() {
@@ -26,6 +27,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="hero-illustration">
+          <img src={gray_cat} alt="gray cat"/>
         </div>
       </section>
 
