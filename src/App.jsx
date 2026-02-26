@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Stitch from './components/Stitch';
 import Upcycle from './components/Upcycle'; 
-import Minigame from './components/Minigame';
+import Minigame from './components/minigame';
 import NavBar from './components/NavBar';
 import Footer from './components/footer';
 

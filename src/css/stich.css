@@ -1,0 +1,52 @@
+.page {
+    display: flex;
+}
+
+.sidenav {
+    background-color: var(--pink);
+    position: sticky;
+    height: 100;
+    width: 30%;
+    margin-left: 1rem;
+}
+
+
+.title {
+    text-align: center;
+
+}
+
+.navButton{
+    background-color: white;
+    border-radius: 2rem;
+    border: 4px solid var(--purple); 
+    padding: 0.5rem 0.7rem;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+.navButton:hover {
+    background-color: var(--purple);
+    cursor: pointer;
+}
+
+
+.cat {
+    width: 10rem;
+    height: auto;
+    display: flex;
+    flex-direction: end;
+}
+
+.stitchCard {
+    border-radius: 3rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+    background-color: var(--tan);
+}
+
+@media {
+    
+}
