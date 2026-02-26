@@ -422,21 +422,6 @@ export default function Minigame() {
   return (
     <div className="psc-page">
 
-      {/* ── NAV PLACEHOLDER ─────────────────────────────────────────── */}
-      <nav className="psc-nav">
-        <a className="psc-nav-logo" href="#">
-          🐾 Pawfect Stitch Co.
-        </a>
-        <ul className="psc-nav-links">
-          {["Home", "Learn Stitch", "Recycling", "Mini Game"].map((page, i) => (
-            <li key={page}>
-              <a href="#" className={i === 3 ? "psc-nav-active" : ""}>{page}</a>
-            </li>
-          ))}
-        </ul>
-        <span className="psc-nav-placeholder">[Navbar placeholder]</span>
-      </nav>
-
       {/* ── PAGE HEADER ─────────────────────────────────────────────── */}
       <header className="psc-page-header">
         <p className="psc-eyebrow">Mini Game</p>
