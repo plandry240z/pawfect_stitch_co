@@ -1,5 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import "../css/minigame.css";
+import "../css/index.css";
+// function Minigame(){
+//     return (
+//         <>
+//             <h1>Welcome to the Minigame Page</h1>
+//         </>
+//     );
+// }
+// >>>>>>> main
 
 // ─── YARN DATA ────────────────────────────────────────────────────────────────
 const YARNS = {
