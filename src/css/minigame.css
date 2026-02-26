@@ -1,0 +1,488 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap');
+
+/* ─── RESET ──────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── PAGE ───────────────────────────────────────────────────────────────── */
+.psc-page {
+  min-height: 100vh;
+  background: #fdfdfd;
+  font-family: 'Nunito', sans-serif;
+  color: #1a1a1a;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ────────────────────────────────────────────────────────────────── */
+.psc-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 4rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(253, 253, 253, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(180, 180, 180, 0.15);
+}
+
+.psc-nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.psc-nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.psc-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+}
+
+.psc-nav-links a:hover {
+  color: #1a1a1a;
+}
+
+.psc-nav-active {
+  color: #1a1a1a !important;
+  border-bottom: 2px solid #1a1a1a;
+  padding-bottom: 2px;
+}
+
+.psc-nav-placeholder {
+  font-size: 0.75rem;
+  color: #bbb;
+  font-style: italic;
+}
+
+/* ─── PAGE HEADER ────────────────────────────────────────────────────────── */
+.psc-page-header {
+  text-align: center;
+  padding: 4rem 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.psc-page-header::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -60px;
+  width: 320px;
+  height: 320px;
+  background: #ecc0cf;
+  border-radius: 50%;
+  opacity: 0.35;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.psc-page-header::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: -80px;
+  width: 260px;
+  height: 260px;
+  background: #b5c7eb;
+  border-radius: 50%;
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.psc-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #777;
+  margin-bottom: 0.6rem;
+  position: relative;
+  z-index: 1;
+}
+
+.psc-page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  color: #1a1a1a;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.psc-page-title em {
+  font-style: italic;
+  color: #444;
+}
+
+.psc-page-sub {
+  font-size: 1rem;
+  color: #444;
+  font-weight: 600;
+  line-height: 1.7;
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── GAME LAYOUT — 50/50 split ──────────────────────────────────────────── */
+.psc-game-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: flex-start;
+  padding: 1rem 4rem 5rem;
+}
+
+/* ─── LEFT — WHEEL COLUMN ────────────────────────────────────────────────── */
+.psc-wheel-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.psc-wheel-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 2rem;
+  border: 1.5px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.psc-wheel-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Wheel pointer + canvas (moved out of inline styles) */
+.psc-wheel-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.psc-wheel-pointer {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-top: 20px solid #1a1a1a;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
+  z-index: 10;
+}
+
+.psc-wheel-canvas {
+  display: block;
+  border-radius: 50%;
+}
+
+/* ─── SPIN BUTTON ────────────────────────────────────────────────────────── */
+.psc-spin-btn {
+  background: #1a1a1a;
+  color: #fdfdfd;
+  padding: 0.85rem 2.4rem;
+  border-radius: 999px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  letter-spacing: 0.2px;
+}
+
+.psc-spin-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.psc-spin-btn:disabled {
+  background: #bbb;
+  cursor: not-allowed;
+}
+
+/* ─── SPUN RESULT BADGE ──────────────────────────────────────────────────── */
+.psc-spun-result {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #1a1a1a;
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  animation: pscFadeUp 0.4s ease both;
+}
+
+/* ─── RIGHT COLUMN ───────────────────────────────────────────────────────── */
+.psc-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ─── CARD ───────────────────────────────────────────────────────────────── */
+.psc-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 1.8rem;
+  border: 1.5px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.psc-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.09);
+}
+
+.psc-card-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #777;
+  margin-bottom: 1.2rem;
+}
+
+/* Prompt card shown before spinning */
+.psc-prompt {
+  text-align: center;
+  color: #777;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 2.5rem;
+}
+
+/* ─── QUIZ ───────────────────────────────────────────────────────────────── */
+.psc-quiz {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.psc-quiz-question {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.psc-quiz-label {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+}
+
+.psc-quiz-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Base quiz button */
+.psc-quiz-btn {
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  background: #fdfdfd;
+  color: #444;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.psc-quiz-btn:hover:not(:disabled) {
+  background: rgba(181, 199, 235, 0.2);
+  border-color: #b5c7eb;
+  transform: translateY(-1px);
+}
+
+.psc-quiz-btn:disabled {
+  cursor: default;
+}
+
+/* Correct answer — green */
+.psc-quiz-correct {
+  background: #d4edda !important;
+  border-color: #6abf7b !important;
+  color: #1e6b34 !important;
+}
+
+/* Wrong answer — red */
+.psc-quiz-wrong {
+  background: #f8d7da !important;
+  border-color: #e07b80 !important;
+  color: #842029 !important;
+}
+
+/* Reveals correct answer after wrong pick */
+.psc-quiz-reveal {
+  background: #d4edda !important;
+  border-color: #6abf7b !important;
+  color: #1e6b34 !important;
+  opacity: 0.7;
+}
+
+/* ─── LEARN MORE ACCORDION ───────────────────────────────────────────────── */
+.psc-learn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.psc-accordion-item {
+  border: 1.5px solid rgba(0, 0, 0, 0.07);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.psc-accordion-item.psc-accordion-open {
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.psc-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.1rem;
+  background: none;
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: #1a1a1a;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.psc-accordion-trigger:hover {
+  background: rgba(223, 208, 192, 0.15);
+}
+
+.psc-accordion-icon {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #777;
+  flex-shrink: 0;
+}
+
+.psc-accordion-body {
+  padding: 0 1.1rem 1rem;
+  animation: pscFadeUp 0.25s ease both;
+}
+
+/* Pros list */
+.psc-learn-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.psc-learn-list li {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #444;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.psc-learn-pros li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #6abf7b;
+  font-weight: 800;
+}
+
+.psc-learn-cons li::before {
+  content: '✗';
+  position: absolute;
+  left: 0;
+  color: #e07b80;
+  font-weight: 800;
+}
+
+.psc-learn-text {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #444;
+  line-height: 1.65;
+}
+
+/* ─── ANIMATION ──────────────────────────────────────────────────────────── */
+@keyframes pscFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .psc-nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .psc-nav-links {
+    gap: 1.2rem;
+  }
+
+  .psc-page-header {
+    padding: 3rem 1.5rem 1.5rem;
+  }
+
+  .psc-page-header::before,
+  .psc-page-header::after {
+    display: none;
+  }
+
+  .psc-game-layout {
+    grid-template-columns: 1fr;
+    padding: 1rem 1.5rem 4rem;
+  }
+}
