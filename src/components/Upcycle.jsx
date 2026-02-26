@@ -1,4 +1,5 @@
 import "../index.css";
+import "../css/Upcycle.css";
 import plarn_cat from "../images/green_cat.png";
 import tshirt_cat from "../images/brown_cat.png";
 import recycle_cat from "../images/gray_cat.png";
@@ -39,6 +40,7 @@ function Upcycle() {
                                 <img src={item.image} alt={item.title} />
                             </div>
                         </aside>
+                        <section className="upcycle-content">
                         <div className="upcycle-title">
                             <h2>{item.title}</h2>
                         </div>
@@ -53,6 +55,7 @@ function Upcycle() {
                                 <button><a href={item.resource} target="_blank" rel="noopener noreferrer">Learn More</a></button>
                             </div>
                         </div>
+                        </section>
                     </div>
                 ))}
             </div>
