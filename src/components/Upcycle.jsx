@@ -1,6 +1,6 @@
 import "../index.css";
 import "../css/Upcycle.css";
-import plarn_cat from "../images/green_cat.png";
+import plarn_cat from "../images/plarn_cat.png";
 import tshirt_cat from "../images/brown_cat.png";
 import recycle_cat from "../images/gray_cat.png";
 
