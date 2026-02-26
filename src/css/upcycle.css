@@ -1,5 +1,11 @@
-body{
+.upcycle{
+    margin-top: 0;
+    padding: 0;
     background-color: var(--tan);
+}
+.upcycle h1{
+    margin-top:0;
+    padding:1rem;
 }
 
 .upcycle-item {
