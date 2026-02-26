@@ -21,6 +21,13 @@ function Upcycle() {
             image: tshirt_cat
         },
         {
+            title: "Reusing Yarn",
+            description: "If there are old projects you have, you can unravel them and reuse the yarn for new projects! This is a great way to reduce waste and save money. Just make sure to check the condition of the yarn before reusing it, as some yarns may become damaged or weakened after being used.",
+            video: "https://youtu.be/abc456",
+            resource: "https://www.craftsy.com/post/reuse-yarn/",
+            image: plarn_cat
+        },
+        {
             title: "Why Upcycle vs. Recycle?",
             description: "Upcycling is the process of transforming waste materials or unwanted products into new, higher quality items. It helps reduce waste, conserve resources, and promote sustainability by giving new life to old items. Upcycling can take many forms, from creative DIY projects to innovative design solutions.",
             video: "https://youtu.be/xyz123",
