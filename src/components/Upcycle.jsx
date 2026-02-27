@@ -1,8 +1,10 @@
 import "../index.css";
 import "../css/Upcycle.css";
 import plarn_cat from "../images/plarn_cat.png";
-import tshirt_cat from "../images/brown_cat.png";
-import recycle_cat from "../images/gray_cat.png";
+import tshirt_cat from "../images/tshirt_cat.png";
+import recycle_cat from "../images/recycle_cat.png";
+import nom_cat from "../images/nom_cat.png";
+import paw from "../images/paw.png";
 
 function Upcycle() {
     const upcycle = [
@@ -19,6 +21,13 @@ function Upcycle() {
             video: "https://youtu.be/xpyTG7oznZM",
             resource: "https://hearthookhome.com/t-shirt-yarn-crochet-patterns/",
             image: tshirt_cat
+        },
+        {
+            title: "Reusing Yarn",
+            description: "If there are old projects you have, you can unravel them and reuse the yarn for new projects! This is a great way to reduce waste and save money. Just make sure to check the condition of the yarn before reusing it, as some yarns may become damaged or weakened after being used.",
+            video: "https://youtu.be/abc456",
+            resource: "https://www.youtube.com/shorts/a7SptLTO4Rk",
+            image: nom_cat
         },
         {
             title: "Why Upcycle vs. Recycle?",
@@ -48,12 +57,14 @@ function Upcycle() {
                             <p>{item.description}</p>
                         </div>
                         <div className="button-container">
-                            <div className="upcycle-video">
-                                <button><a href={item.video} target="_blank" rel="noopener noreferrer">Watch Video</a></button>
-                            </div>
-                            <div className="upcycle-resource">
-                                <button><a href={item.resource} target="_blank" rel="noopener noreferrer">Learn More</a></button>
-                            </div>
+                            <button onClick={() => window.open(item.video, "_blank")}>
+                                <img src={paw} alt="Video Icon" />
+                                Watch Video
+                            </button>
+                            <button onClick={() => window.open(item.resource, "_blank")}>
+                                <img src={paw} alt="Resource Icon" />
+                                View Resource
+                            </button>
                         </div>
                         </section>
                     </div>
