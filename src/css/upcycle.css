@@ -2,9 +2,10 @@
     margin-top: 0;
     padding: 0;
     background-color: var(--tan);
+    text-align: center;
 }
-.upcycle h1{
-    margin-top:0;
+.upcycle h1,h2{
+    margin:0;
     padding:1rem;
 }
 
@@ -34,7 +35,12 @@
     background-color: var(--blue);
     padding:.5rem;
     border-radius: 2rem;
+    font-size: 1rem;
     width:100%;
+}
+.upcycle-description{
+    margin:1rem;
+    font-size: 1rem;
 }
 aside{
    width: 300px;
@@ -50,13 +56,20 @@ aside img {
     flex-direction: row-reverse;
 }   
 .button-container{
+    width:100%;
     display:flex;
     flex-direction:row;
-    
-    gap:1rem;
+    justify-content: space-between;
+}
+.button-container img{
+    width: 50px;
+    height: auto;
 }
 .button-container button{
-    background-color: var(--pink);
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--white);
     border: none;
     padding: .5rem 1rem;
     border-radius: 1rem;

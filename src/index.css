@@ -24,11 +24,9 @@ h1{
 }
 
 h2 {
-  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--text-light);
   margin-bottom: 0.75rem;
 }
 /* background-color: var(--accent-background); <-- example on how to use global color*/

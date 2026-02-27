@@ -3,6 +3,7 @@ import "../css/Upcycle.css";
 import plarn_cat from "../images/plarn_cat.png";
 import tshirt_cat from "../images/brown_cat.png";
 import recycle_cat from "../images/gray_cat.png";
+import paw from "../images/paw.png";
 
 function Upcycle() {
     const upcycle = [
@@ -56,10 +57,10 @@ function Upcycle() {
                         </div>
                         <div className="button-container">
                             <div className="upcycle-video">
-                                <button><a href={item.video} target="_blank" rel="noopener noreferrer">Watch Video</a></button>
+                                <button><img src={paw} alt="Play Video" /><a href={item.video} target="_blank" rel="noopener noreferrer">Watch Video</a></button>
                             </div>
                             <div className="upcycle-resource">
-                                <button><a href={item.resource} target="_blank" rel="noopener noreferrer">Learn More</a></button>
+                                <button><img src={paw} alt="Learn More" /><a href={item.resource} target="_blank" rel="noopener noreferrer">Learn More</a></button>
                             </div>
                         </div>
                         </section>
