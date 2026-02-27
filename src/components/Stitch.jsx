@@ -84,12 +84,14 @@ function StitchCard ({stitch}) {
     return (
         <section id = {stitch.id} className = "stitchCard">
         <h1>{stitch.label}</h1>
-        <div className = "abbrBox">
-            <h2>Abbreviation:</h2>{stitch.abbreviation}
+        <div className = "example">
+            <h2>Abbreviation:</h2><p>{stitch.abbreviation}</p>
         </div>
         <div className = "example">
-            <h2>Example:</h2>{stitch.example} <br/> {stitch.translation}
-            <h2>Translation:</h2> {stitch.translation}
+            <h2>Example:</h2><p>{stitch.example}</p><p>{stitch.translation}</p>
+        </div>
+        <div className = "example">
+            <h2>Translation:</h2> <p>{stitch.translation}</p>
         </div>
         </section>
     );
@@ -104,18 +106,19 @@ export default function StitchesPage(){
     return(
         <div className = "page">
             <aside className="sidenav">
-                <h2 className = "title">Learn Stitches</h2>
-                    {stitches.map((stitch) => (
-                        <SidenavButton key = {stitch.id} stitch = {stitch}  />    //makes it actually go to that square when the button is active
-                ))}
-                {/* <img className = "cat" src = {cat} alt = "orange cat with pink yarn" /> */}
+                <div className="sidenav-sticky">
+                    <h2 className="title">Learn Stitches</h2>
+                        {stitches.map((stitch) => (
+                    <SidenavButton key={stitch.id} stitch={stitch} />
+                    ))}
+                </div>
             </aside>
-
             <main className="main">
                 {stitches.map((stitch) => (
                         <StitchCard key = {stitch.id} stitch = {stitch} /> //same thing as before but always makes the squares for the info
                 ))}
             </main>
         </div>
+
     );
 }

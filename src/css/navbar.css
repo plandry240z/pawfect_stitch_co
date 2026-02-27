@@ -3,6 +3,9 @@ nav{
     justify-content: flex-end;
     background-color: white;
     padding: 10px;
+    position: sticky;
+    z-index: 100;
+    top:0;
 }
 .nav-links {
     display: flex;
