@@ -1,7 +1,7 @@
 .upcycle{
     margin-top: 0;
     padding: 0;
-    background-color: var(--tan);
+    background-color: var(--bg);
     text-align: center;
 }
 .upcycle h1,h2{
@@ -32,16 +32,17 @@
     width:40%;
     min-height: 200px;
     margin: 0 auto;
-    background-color: var(--bg);
+    background-color: var(--blue);
     padding: 1rem;
     border-radius: 2rem;
 }
 .upcycle-title{
-    background-color: var(--blue);
+    background-color: var(--bg);
     padding:.5rem;
     border-radius: 2rem;
     font-size: 1rem;
     width:100%;
+    font-style: italic;
 }
 .upcycle-description{
     margin:1rem;
@@ -55,7 +56,9 @@ aside{
 aside img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 1rem;
+    background-color: var(--pink);
+    padding:1rem;
 }
 /*flip text and image everyother item*/
 .upcycle-item:nth-child(even) {
