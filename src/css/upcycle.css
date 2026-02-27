@@ -46,6 +46,7 @@
 .upcycle-description{
     margin:1rem;
     font-size: 1rem;
+    line-height: 1.7rem;
 }
 aside{
    width: 300px;
@@ -75,7 +76,9 @@ aside img {
     align-items: center;
     flex-direction: column;
     background-color: var(--bg);
-    border: none;
+    border: 5px;
+    border-color: var(--blue);
+    border-style: dotted;
     padding: .5rem 1rem;
     border-radius: 1rem;
     cursor: pointer;
@@ -85,7 +88,8 @@ aside img {
     text-decoration: none;
 }
 .button-container button:hover{
-    background-color: var(--purple);
+    background-color: var(--blue);
+    color:white;
 }
 
 
