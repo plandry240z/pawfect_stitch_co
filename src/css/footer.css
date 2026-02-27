@@ -1,17 +1,33 @@
-footer{
+footer {
     display: flex;
     justify-content: center;
     background-color: white;
     padding: 10px;
 }
+
 .footer-content {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
     background-color: white;
     padding: 10px;
+    width: 100%;
 }
 
 .footer-content p {
     text-decoration: none;
     color: black;
+    flex: 1;
+}
+
+.footer-content p:first-child {
+    text-align: left;
+}
+
+.footer-content p:nth-child(2) {
+    text-align: center;
+}
+
+.footer-content p:last-child {
+    text-align: right;
 }
