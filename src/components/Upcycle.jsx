@@ -2,7 +2,8 @@ import "../index.css";
 import "../css/Upcycle.css";
 import plarn_cat from "../images/plarn_cat.png";
 import tshirt_cat from "../images/tshirt_cat.png";
-import recycle_cat from "../images/gray_cat.png";
+import recycle_cat from "../images/recycle_cat.png";
+import nom_cat from "../images/nom_cat.png";
 import paw from "../images/paw.png";
 
 function Upcycle() {
@@ -26,7 +27,7 @@ function Upcycle() {
             description: "If there are old projects you have, you can unravel them and reuse the yarn for new projects! This is a great way to reduce waste and save money. Just make sure to check the condition of the yarn before reusing it, as some yarns may become damaged or weakened after being used.",
             video: "https://youtu.be/abc456",
             resource: "https://www.youtube.com/shorts/a7SptLTO4Rk",
-            image: plarn_cat
+            image: nom_cat
         },
         {
             title: "Why Upcycle vs. Recycle?",
