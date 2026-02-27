@@ -25,7 +25,7 @@ function Upcycle() {
             title: "Reusing Yarn",
             description: "If there are old projects you have, you can unravel them and reuse the yarn for new projects! This is a great way to reduce waste and save money. Just make sure to check the condition of the yarn before reusing it, as some yarns may become damaged or weakened after being used.",
             video: "https://youtu.be/abc456",
-            resource: "https://www.craftsy.com/post/reuse-yarn/",
+            resource: "https://www.youtube.com/shorts/a7SptLTO4Rk",
             image: plarn_cat
         },
         {
@@ -56,12 +56,14 @@ function Upcycle() {
                             <p>{item.description}</p>
                         </div>
                         <div className="button-container">
-                            <div className="upcycle-video">
-                                <button><img src={paw} alt="Play Video" /><a href={item.video} target="_blank" rel="noopener noreferrer">Watch Video</a></button>
-                            </div>
-                            <div className="upcycle-resource">
-                                <button><img src={paw} alt="Learn More" /><a href={item.resource} target="_blank" rel="noopener noreferrer">Learn More</a></button>
-                            </div>
+                            <button onClick={() => window.open(item.video, "_blank")}>
+                                <img src={paw} alt="Video Icon" />
+                                Watch Video
+                            </button>
+                            <button onClick={() => window.open(item.resource, "_blank")}>
+                                <img src={paw} alt="Resource Icon" />
+                                View Resource
+                            </button>
                         </div>
                         </section>
                     </div>
