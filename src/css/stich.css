@@ -25,7 +25,7 @@
 .navButton{
     background-color: var(--bg);
     border-radius: 2rem;
-    border: 2px solid;
+    border: 2px solid var(--pink);
     padding: 0.5rem 0.7rem;
     display: flex;
     flex-direction: column;
@@ -35,45 +35,82 @@
     font-family: 'Nunito', sans-serif;
     font-weight: 800;
     font-size: 0.95rem;
-    color: var(--pink);
+    color: var(--text-mid);
+    cursor: pointer;
 }
 
 .navButton:hover {
     background-color: var(--pink);
     color: var(--bg);
     cursor: pointer;
+    transform: translateX(3px);
+    box-shadow: 0 4px 14px var(--pink);
 }
 
 
+.navButton.active {
+    background-color: var(--blue);
+    color: var(--bg);
+    cursor: pointer;
+    border-color: var(--blue);
+    box-shadow: 0 4px 8px var(--blue);
+
+}
+
 .cat {
-    width: 10rem;
+    width: 14rem;
+    padding: 2rem 1rem;
+    position: sticky;
+    top: 5rem;
+    align-self: flex-start;
+}
+.cat img{
+    width: 100%;
     height: auto;
-    display: flex;
-    flex-direction: end;
 }
 
 .main{
-    width: calc(100% - 16rem);
+    width: calc(100% - 16rem - 14rem);;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
+    padding-right:0;
 }
 
 .stitchCard {
     border-radius: 3rem;
     padding: 2rem;
-    border: 0.5rem solid var(--pink);
+    border: 2px solid var(--pink);
     display: flex;
     flex-direction: column;
     margin: 3rem auto;
     justify-content: space-between;
-    box-sizing: border-box;
-    width: 700px;
+    width:100%;
+    max-width: 700px;
     height: auto;
     background-color: var(--bg);
+    position: relative;
+    overflow: hidden;
+    scroll-margin: 5rem;
 }
+
+.stitchCard::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    background: var(--card-blob, var(--pink));
+    opacity: 0.18;
+}
+
+.stitchCard:nth-child(odd)  { --card-blob: var(--pink); }
+
+.stitchCard:nth-child(even) { --card-blob: var(--blue); }
 
 .stitchCard p{
     font-size: 0.95rem;
@@ -93,4 +130,68 @@
     font-family: 'Nunito', sans-serif;
     font-size: 1rem;
     margin-bottom: 0.8rem;
+}
+.abbr {
+    padding: 0.3rem 0.9rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    background: rgba(236,192,207,0.3);
+    color: #bb788d;
+    max-width: 5rem;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.stitchCard:nth-child(even) .abbr {
+    background: rgba(181,199,235,0.35);
+    color: #4a6fa5;
+}
+
+.cardrrow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+.cardlabel {
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+}
+
+.cardvalue {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-mid);
+    line-height: 1.6;
+    background: rgb(245, 245, 245);
+    border-radius: 10px;
+    padding: 0.9rem 0.75rem;
+}
+
+.cardvalue.code {
+    font-size: 0.9rem;
+    background: rgba(236,192,207,0.12);
+    border-left: 3px solid var(--pink);
+}
+
+.stitchCard:nth-child(even) .card-value.code {
+    background: rgba(181,199,235,0.15);
+    border-left-color: var(--blue);
+}
+
+.cardvideo {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 16/9;
+    border-radius: 1rem;
+    margin-top: 0.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
 }
