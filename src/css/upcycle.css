@@ -42,7 +42,6 @@
     border-radius: 2rem;
     font-size: 1rem;
     width:100%;
-    font-style: italic;
 }
 .upcycle-description{
     margin:1rem;
@@ -91,8 +90,8 @@ aside img {
     text-decoration: none;
 }
 .button-container button:hover{
-    background-color: var(--blue);
-    color:white;
+    border-color:var(--pink);
+
 }
 
 
