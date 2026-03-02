@@ -59,18 +59,21 @@
 
 .cat {
     width: 14rem;
-    padding: 2rem 1rem;
+    top:0;
     position: sticky;
     top: 5rem;
     align-self: flex-start;
 }
 .cat img{
     width: 100%;
-    height: auto;
+    height: 150%;
+    object-fit: cover;
+    object-position: center top;
+    will-change: transform;
 }
 
 .main{
-    width: calc(100% - 16rem - 14rem);;
+    width: calc(100% - 16rem - 14rem);
     padding: 2rem;
     display: flex;
     flex-direction: column;
