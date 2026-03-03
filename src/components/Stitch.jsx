@@ -1,9 +1,7 @@
 import { useState } from "react";
 import "../index.css";
 import "../css/stich.css";
-import cat from "../images/long_cat.png";
-import {useEffect, useRef} from "react";
-
+import cat from "../images/hook_cat.png";
 const stitches = [
     {
         id: "How-to-Read-Pattern",
@@ -126,22 +124,6 @@ export default function StitchesPage(){
     const section = document.getElementById(stitch.id);
     if (section) section.scrollIntoView({ behavior: "smooth" });
     }
-     const catRef = useRef(null);
-    
-    useEffect(() => {
-        const handleScroll = () => {
-            if (catRef.current) {
-                const scrollTop = window.scrollY;
-                const loopRange = 500; // Range for the looping effect in pixels
-                const translate = (scrollTop * 0.5) % loopRange; // Maximum translation in pixels
-                catRef.current.style.transform = `translateY(${translate}px)`;
-            }
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll), {passive: true};
-        };
-    }, []);
 
     return(
         <div className = "page">
@@ -158,9 +140,9 @@ export default function StitchesPage(){
                         <StitchCard key = {stitch.id} stitch = {stitch} /> //same thing as before but always makes the squares for the info
                 ))}
             </main>
-             <div className="cat" ref={catRef}>
+            <aside className="cat">
             <img src={cat} alt="cat" />
-        </div>
+            </aside>
         </div>
     );
 }
