@@ -114,9 +114,9 @@ export default function HomePage() {
       <section className="sustain-section" id="sustainability">
         <div className="sustain-inner">
           <p className="section-label">Sustainability</p>
-          <h2 className="section-title">
+          <h1 className="section-title">
             Crafting a world<br />worth purring about
-          </h2>
+          </h1>
           <p className="sustain-intro">
             Fast fashion is one of the largest contributors to landfill waste. Crochet
             can be part of the solution when we're intentional with our materials. 
