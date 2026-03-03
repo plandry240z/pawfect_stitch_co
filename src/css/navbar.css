@@ -18,3 +18,16 @@ nav{
     text-decoration: none;
     color: black;
 }
+
+.active-home, .nav-links a:nth-child(1):hover {
+    color: var(--tan)!important;
+}
+.active-stitch, .nav-links a:nth-child(2):hover {
+    color: var(--pink)!important   ;
+}
+.active-minigame, .nav-links a:nth-child(3):hover {
+    color: var(--purple)!important;
+}
+.active-upcycle, .nav-links a:nth-child(4):hover {
+    color: var(--blue)!important;
+}
