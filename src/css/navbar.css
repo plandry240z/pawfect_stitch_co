@@ -31,12 +31,12 @@ nav{
     border: 5px solid var(--pink)!important;
     border-radius: 10px;
 }
-.active-minigame, .nav-links a:nth-child(3):hover {
+.active-minigame, .nav-links a:nth-child(4):hover {
     border-color: var(--purple)!important;
     border: 5px solid var(--purple)!important;
     border-radius: 10px;
 }
-.active-upcycle, .nav-links a:nth-child(4):hover {
+.active-upcycle, .nav-links a:nth-child(3):hover {
     border-color: var(--blue)!important;
     border: 5px solid var(--blue)!important;
     border-radius: 10px;

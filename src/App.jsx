@@ -14,8 +14,8 @@ function App(){
         <Route path='/' element={<Home />} /> 
         <Route path='/home' element={<Home />} /> 
         <Route path='/stitch' element={<Stitch />} />
-        <Route path='/upcycle' element={<Upcycle />} />
         <Route path='/minigame' element={<Minigame />} />
+        <Route path='/upcycle' element={<Upcycle />} />
         <Route path='/footer' element={<Footer />} />
       </Routes>
         <Footer />
