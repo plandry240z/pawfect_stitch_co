@@ -43,6 +43,10 @@ nav{
     border: 5px solid var(--blue)!important;
     border-radius: 10px;
 }
+
+nav a:first-child {
+    margin-right: auto;
+}
 .paw-logo {
     height: 50px;
     margin-right: auto;

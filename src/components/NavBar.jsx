@@ -7,7 +7,9 @@ import logo from "../images/logo.png";
 const NavBar = () => {
     return (
         <nav>
+            <NavLink to='/home'>
             <img className="paw-logo" src={logo} alt="Paw Logo" />
+            </NavLink>
             <div className ="nav-links">
                 <NavLink to='/home'className={({ isActive }) => isActive ?'active-home' : '' }>Home</NavLink>
                 <NavLink to='/stitch'className={({ isActive }) => isActive ?'active-stitch' : '' }>Stitch</NavLink>
