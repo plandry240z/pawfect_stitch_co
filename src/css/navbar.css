@@ -1,6 +1,7 @@
 nav{
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     background-color: white;
     padding: 10px;
     position: sticky;
@@ -19,6 +20,7 @@ nav{
     padding:5px 10px;
     border:5px solid transparent;
     border-radius: 10px;
+    text-align: center;
 }
 
 .active-home, .nav-links a:nth-child(1):hover {
@@ -40,4 +42,8 @@ nav{
     border-color: var(--blue)!important;
     border: 5px solid var(--blue)!important;
     border-radius: 10px;
+}
+.paw-logo {
+    height: 50px;
+    margin-right: auto;
 }
