@@ -91,8 +91,9 @@
 .cat-col {
     flex: 0 0 33%;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
     align-items: center;
+    gap: 1rem;
 }
 
 .cat-img {
@@ -111,10 +112,90 @@
     padding-top: 1.8rem;
 }
 
+/* ─── MODE TOGGLE BUTTON ─────────────────────────────────────────────────── */
+.mode-btn {
+    padding: 0.45rem 1.3rem;
+    border-radius: 999px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    border: 2px solid var(--text-dark);
+    background: transparent;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.mode-btn:hover {
+    background: var(--text-dark);
+    color: #fff;
+}
+
+/* ─── MANUAL SELECTION GRID ──────────────────────────────────────────────── */
+.manual-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    max-width: 300px;
+}
+
+.yarn-select-btn {
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: filter 0.15s, transform 0.15s, border-color 0.15s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.yarn-select-btn:hover {
+    filter: brightness(0.9);
+    transform: translateY(-1px);
+}
+
+.yarn-select-btn.selected {
+    border-color: var(--text-dark);
+}
+
+/* ─── SCROLL HINT ────────────────────────────────────────────────────────── */
+.scroll-hint {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 85%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    text-decoration: none;
+    color: var(--text-light);
+    /* z-index: 2; */
+}
+
+.scroll-hint-text {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.scroll-hint-arrow {
+    font-size: 1.2rem;
+}
+
 /* ─── WHEEL ──────────────────────────────────────────────────────────────── */
 .wheel-wrap {
     position: relative;
     display: inline-block;
+    transition: opacity 0.3s;
+}
+
+.wheel-wrap.wheel-dimmed {
+    opacity: 0.35;
 }
 
 .wheel-pointer {
@@ -166,7 +247,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: 0.5rem 0 1.5rem;
+    padding: 0.5rem 0 1rem;
+    margin-top: -1rem;
 }
 
 .spun-result {
@@ -178,6 +260,50 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
     text-align: center;
     font-family: 'chalk';
+}
+
+/* ─── PAST RESULTS ───────────────────────────────────────────────────────── */
+.past-results-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 0 0.8rem;
+}
+
+.past-results {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.past-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+.past-pill {
+    padding: 0.35rem 1.1rem;
+    border-radius: 999px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: filter 0.15s, transform 0.15s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.past-pill:hover {
+    filter: brightness(0.93);
+    transform: translateY(-1px);
 }
 
 /* ─── RESULTS SECTION ────────────────────────────────────────────────────── */
@@ -279,6 +405,27 @@
     opacity: 0.7;
 }
 
+/* ─── RESET QUIZ BUTTON ──────────────────────────────────────────────────── */
+.reset-quiz-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1.8rem;
+    border-radius: 999px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    border: 2px solid var(--text-dark);
+    background: transparent;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    display: block;
+}
+
+.reset-quiz-btn:hover {
+    background: var(--text-dark);
+    color: #fff;
+}
+
 /* ─── ACCORDION ──────────────────────────────────────────────────────────── */
 .accordion-item {
     border-radius: 14px;
@@ -318,6 +465,11 @@
     font-weight: 400;
     color: var(--text-light);
     flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.accordion-icon.open {
+    transform: rotate(180deg);
 }
 
 .accordion-body {
@@ -374,17 +526,139 @@
 }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+
+/* ── Tablet (≤ 900px) ── */
 @media (max-width: 900px) {
+    /* Stack cat + wheel vertically */
     .game-row {
         flex-direction: column;
+        align-items: center;
         padding: 0 2rem 2rem;
+        gap: 2rem;
     }
 
     .cat-col {
-        justify-content: center;
+        flex: none;
+        width: 100%;
+        align-items: center;
     }
 
+    .wheel-col {
+        flex: none;
+        width: 100%;
+        padding-top: 0;
+    }
+
+    /* Hide scroll hint on tablet/mobile — doesn't make sense stacked */
+    .scroll-hint {
+        display: none;
+    }
+
+    /* Shrink the wheel so it fits without horizontal scroll */
+    .wheel-canvas {
+        width: 280px !important;
+        height: 280px !important;
+    }
+
+    /* Narrower results cards */
     .results-section {
-      width: 95%;
+        width: 92%;
+    }
+
+    /* Spun result: reduce side padding so it doesn't overflow */
+    .spun-result {
+        padding: 1rem 2rem;
+        font-size: 1.4rem;
+    }
+
+    /* Manual grid can use full width */
+    .manual-grid {
+        max-width: 100%;
+    }
+}
+
+/* ── Mobile (≤ 600px) ── */
+@media (max-width: 600px) {
+    /* Tighter header */
+    .mg-header {
+        padding: 3rem 1.2rem 2rem;
+    }
+
+    .mg-subtitle {
+        font-size: 1rem;
+    }
+
+    /* Even smaller wheel on phone */
+    .wheel-canvas {
+        width: 240px !important;
+        height: 240px !important;
+    }
+
+    /* Spin button */
+    .spin-btn {
+        font-size: 1.2rem;
+        padding: 0.8rem 2rem;
+    }
+
+    /* Mode button wraps text gracefully */
+    .mode-btn {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+        text-align: center;
+    }
+
+    /* Quiz buttons */
+    .quiz-options {
+        gap: 0.6rem;
+    }
+
+    .quiz-btn {
+        font-size: 0.95rem;
+        padding: 0.35rem 0.9rem;
+    }
+
+    /* Cards: less padding on phone */
+    .mg-card {
+        padding: 1.2rem;
+    }
+
+    .card-label,
+    .learn-label {
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+
+    /* Accordion trigger text */
+    .accordion-trigger {
+        font-size: 1rem;
+    }
+
+    /* Result pill */
+    .spun-result {
+        padding: 0.9rem 1.2rem;
+        font-size: 1.2rem;
+        width: 90%;
+    }
+
+    /* Past pills row */
+    .past-results {
+        gap: 0.4rem;
+    }
+
+    .past-pill {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.8rem;
+    }
+
+    /* Full-width results section */
+    .results-section {
+        width: 96%;
+        padding-top: 1.2rem;
+    }
+
+    /* Game row tighter on phone */
+    .game-row {
+        padding: 0 1rem 1.5rem;
+        gap: 1.4rem;
     }
 }
