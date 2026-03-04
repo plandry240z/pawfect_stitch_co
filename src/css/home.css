@@ -564,7 +564,7 @@ body {
 }
 
 .gs-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'chalk';
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-dark);
