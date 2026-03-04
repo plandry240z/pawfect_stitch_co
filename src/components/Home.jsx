@@ -190,7 +190,7 @@ export default function HomePage() {
               >
                 <h3>{c.title}</h3>
                 <p>{c.desc}</p>
-                <span className={'sustain-tag ${c.tag}'}>{c.tagLabel}</span>
+                <span className={'sustain-tag ${c.tag}'}>{c.tagLabel} →</span>
               </Link>
             ))}
           </div>
