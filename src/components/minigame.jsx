@@ -89,16 +89,16 @@ const Q2_OPTIONS = ["Yes", "No", "Depends"];
 const Q3_OPTIONS = ["Plants", "Animals", "Plastic", "Recycled materials"];
 
 // ─── SPIN WHEEL ───────────────────────────────────────────────────────────────
-function SpinWheel({ onResult, spinTrigger }) {
-    const canvasRef = useRef(null);
-    const animRef   = useRef(null);
+function SpinWheel({ onResult, spinTrigger, dimmed }) {
+    const canvasRef    = useRef(null);
+    const animRef      = useRef(null);
     const currentAngle = useRef(0);
     const [spinning, setSpinning] = useState(false);
     const ARC = (2 * Math.PI) / YARN_NAMES.length;
 
     // Render at 2× physical pixels for crisp text
-    const LOGICAL = 340;
-    const SCALE   = 2;
+    const LOGICAL  = 340;
+    const SCALE    = 2;
     const PHYSICAL = LOGICAL * SCALE;
 
     const draw = (rot) => {
@@ -144,7 +144,7 @@ function SpinWheel({ onResult, spinTrigger }) {
 
             if (name === "Recycled Polyester") {
                 ctx.font = `bold ${18 * SCALE}px 'Nunito', sans-serif`;
-                ctx.fillText("Recycled", r - 16 * SCALE, -5 * SCALE);
+                ctx.fillText("Recycled",  r - 16 * SCALE, -5 * SCALE);
                 ctx.fillText("Polyester", r - 16 * SCALE, 14 * SCALE);
             } else {
                 ctx.font = `bold ${21 * SCALE}px 'Nunito', sans-serif`;
@@ -167,8 +167,8 @@ function SpinWheel({ onResult, spinTrigger }) {
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        canvas.width  = PHYSICAL;
-        canvas.height = PHYSICAL;
+        canvas.width        = PHYSICAL;
+        canvas.height       = PHYSICAL;
         canvas.style.width  = LOGICAL + "px";
         canvas.style.height = LOGICAL + "px";
         draw(0);
@@ -209,19 +209,21 @@ function SpinWheel({ onResult, spinTrigger }) {
     };
 
     return (
-        <div className="wheel-wrap">
-            <div className="wheel-pointer" />
+        <div className={`wheel-wrap${dimmed ? " wheel-dimmed" : ""}`}>
+            {!dimmed && <div className="wheel-pointer" />}
             <canvas ref={canvasRef} className="wheel-canvas" />
         </div>
     );
 }
 
 // ─── QUIZ ─────────────────────────────────────────────────────────────────────
-function Quiz({ yarn }) {
+function Quiz({ yarn, resetKey }) {
     const data = YARNS[yarn];
     const [answers, setAnswers] = useState([null, null, null]);
+    const allAnswered = answers.every((a) => a !== null);
 
-    useEffect(() => { setAnswers([null, null, null]); }, [yarn]);
+    // Reset whenever yarn changes or resetKey bumps
+    useEffect(() => { setAnswers([null, null, null]); }, [yarn, resetKey]);
 
     const correct = [
         data.type,
@@ -255,8 +257,8 @@ function Quiz({ yarn }) {
                             const isCorrect = opt === correct[qIdx];
 
                             let cls = "quiz-btn";
-                            if (selected && isCorrect)  cls += " correct";
-                            if (selected && !isCorrect) cls += " wrong";
+                            if (selected && isCorrect)           cls += " correct";
+                            if (selected && !isCorrect)          cls += " wrong";
                             if (answered && !selected && isCorrect) cls += " reveal";
 
                             return (
@@ -275,18 +277,25 @@ function Quiz({ yarn }) {
                     </div>
                 </div>
             ))}
+            {allAnswered && (
+                <button
+                    className="reset-quiz-btn"
+                    onClick={() => setAnswers([null, null, null])}
+                >
+                    ↺ Try again
+                </button>
+            )}
         </div>
     );
 }
 
 // ─── ACCORDION ────────────────────────────────────────────────────────────────
-function AccordionItem({ title, colorClass, children }) {
-    const [open, setOpen] = useState(false);
+function AccordionItem({ title, colorClass, open, onToggle, children }) {
     return (
         <div className={`accordion-item ${colorClass}${open ? " open" : ""}`}>
-            <button className="accordion-trigger" onClick={() => setOpen((o) => !o)}>
+            <button className="accordion-trigger" onClick={onToggle}>
                 <span>{title}</span>
-                <span className="accordion-icon">{open ? "−" : "+"}</span>
+                <span className={`accordion-icon${open ? " open" : ""}`}>▼</span>
             </button>
             {open && <div className="accordion-body">{children}</div>}
         </div>
@@ -294,53 +303,114 @@ function AccordionItem({ title, colorClass, children }) {
 }
 
 // ─── LEARN MORE ───────────────────────────────────────────────────────────────
-function LearnMore({ yarn }) {
+function LearnMore({ yarn, collapseKey }) {
     const data = YARNS[yarn];
-    return (
-        <div className="learn-more">
-            <p className="learn-label">Learn more about {yarn}</p>
+    const [openIdx, setOpenIdx] = useState(null);
 
-            <AccordionItem title="Pros" colorClass="acc-pros">
+    // Collapse all whenever yarn changes or collapseKey bumps
+    useEffect(() => { setOpenIdx(null); }, [yarn, collapseKey]);
+
+    const toggle = (idx) => setOpenIdx((prev) => (prev === idx ? null : idx));
+
+    const sections = [
+        {
+            title: "Pros", colorClass: "acc-pros",
+            content: (
                 <ul className="learn-list pros">
                     {data.pros.map((p) => <li key={p}>{p}</li>)}
                 </ul>
-            </AccordionItem>
-
-            <AccordionItem title="Cons" colorClass="acc-cons">
+            ),
+        },
+        {
+            title: "Cons", colorClass: "acc-cons",
+            content: (
                 <ul className="learn-list cons">
                     {data.cons.map((c) => <li key={c}>{c}</li>)}
                 </ul>
-            </AccordionItem>
+            ),
+        },
+        {
+            title: "How is it made?", colorClass: "acc-made",
+            content: <p>{data.howMade}</p>,
+        },
+        {
+            title: "Other names or types", colorClass: "acc-names",
+            content: <p>{data.otherNames}</p>,
+        },
+    ];
 
-            <AccordionItem title="How is it made?" colorClass="acc-made">
-                <p>{data.howMade}</p>
-            </AccordionItem>
-
-            <AccordionItem title="Other names or types" colorClass="acc-names">
-                <p>{data.otherNames}</p>
-            </AccordionItem>
+    return (
+        <div className="learn-more">
+            <p className="learn-label">Learn more about {yarn}</p>
+            {sections.map((s, i) => (
+                <AccordionItem
+                    key={s.title}
+                    title={s.title}
+                    colorClass={s.colorClass}
+                    open={openIdx === i}
+                    onToggle={() => toggle(i)}
+                >
+                    {s.content}
+                </AccordionItem>
+            ))}
         </div>
     );
 }
 
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
 function Minigame() {
-    const [spunYarn,    setSpunYarn]    = useState(null);
-    const [spunColor,   setSpunColor]   = useState(null);
-    const [spinning,    setSpinning]    = useState(false);
-    const [spinTrigger, setSpinTrigger] = useState(0);
+    const [activeYarn,   setActiveYarn]   = useState(null);
+    const [activeColor,  setActiveColor]  = useState(null);
+    const [spinning,     setSpinning]     = useState(false);
+    const [spinTrigger,  setSpinTrigger]  = useState(0);
+    const [collapseKey,  setCollapseKey]  = useState(0);  // bumped to collapse accordions
+    const [quizResetKey, setQuizResetKey] = useState(0);  // bumped to reset quiz
+    const [history,      setHistory]      = useState([]); // [{ yarn, color }, ...]
+    const [isManualMode, setIsManualMode] = useState(false);
+    const [selectedManual, setSelectedManual] = useState(null);
+
+    // ── load any yarn (from spin, past pill, or manual pick) ──
+    const loadYarn = (yarn, color) => {
+        setActiveYarn(yarn);
+        setActiveColor(color);
+        setCollapseKey((k) => k + 1);
+        setQuizResetKey((k) => k + 1);
+    };
+
+    // ── called when the wheel finishes spinning ──
+    const handleSpinResult = (yarn, color) => {
+        setSpinning(false);
+        setHistory((prev) => {
+            const filtered = prev.filter((h) => h.yarn !== yarn);
+            return [{ yarn, color }, ...filtered].slice(0, 3);
+        });
+        loadYarn(yarn, color);
+    };
 
     const handleSpinClick = () => {
         if (spinning) return;
         setSpinning(true);
+        setCollapseKey((k) => k + 1);
         setSpinTrigger((t) => t + 1);
     };
 
-    const handleSpinResult = (yarn, color) => {
-        setSpunYarn(yarn);
-        setSpunColor(color);
-        setSpinning(false);
+    // ── manual mode ──
+    const handleModeToggle = () => {
+        setIsManualMode((m) => !m);
+        setSelectedManual(null);
     };
+
+    const handleManualSelect = (yarn, color) => {
+        setSelectedManual(yarn);
+        setHistory((prev) => {
+            const filtered = prev.filter((h) => h.yarn !== yarn);
+            return [{ yarn, color }, ...filtered].slice(0, 3);
+        });
+        loadYarn(yarn, color);
+    };
+
+    // ── past pills (exclude currently active yarn) ──
+    const pastPills = history.filter((h) => h.yarn !== activeYarn);
 
     return (
         <section className="minigame">
@@ -359,38 +429,85 @@ function Minigame() {
             {/* ── CAT + WHEEL ROW ── */}
             <div className="game-row">
                 <div className="cat-col">
-                    <img src={glasses_cat} alt="cat with monocle" className="cat-img" />
-                </div>
-                <div className="wheel-col">
-                    <SpinWheel onResult={handleSpinResult} spinTrigger={spinTrigger} />
-                    <button
-                        className="spin-btn"
-                        onClick={handleSpinClick}
-                        disabled={spinning}
-                    >
-                        {spinning ? "Spinning…" : "Spin!"}
+                    <button className="mode-btn" onClick={handleModeToggle}>
+                        {isManualMode ? "Switch to randomize mode" : "Switch to manual selection mode"}
                     </button>
+                    <img src={glasses_cat} alt="cat with monocle" className="cat-img" />
+                    {isManualMode && (
+                        <div className="manual-grid">
+                            {YARN_NAMES.map((name, i) => (
+                                <button
+                                    key={name}
+                                    className={`yarn-select-btn${selectedManual === name ? " selected" : ""}`}
+                                    style={{ backgroundColor: YARN_COLORS[i] }}
+                                    onClick={() => handleManualSelect(name, YARN_COLORS[i])}
+                                >
+                                    {name}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                    <div className="scroll-hint">
+                        <span className="scroll-hint-text">Scroll down for more</span>
+                        <span className="scroll-hint-arrow">↓</span>
+                    </div>
+                </div>
+
+                <div className="wheel-col">
+                    <SpinWheel
+                        onResult={handleSpinResult}
+                        spinTrigger={spinTrigger}
+                        dimmed={isManualMode}
+                    />
+                    {!isManualMode && (
+                        <button
+                            className="spin-btn"
+                            onClick={handleSpinClick}
+                            disabled={spinning}
+                        >
+                            {spinning ? "Spinning…" : "Spin!"}
+                        </button>
+                    )}
                 </div>
             </div>
 
-            {/* ── SPUN RESULT — centered below row ── */}
-            {spunYarn && (
+            {/* ── SPUN RESULT ── */}
+            {activeYarn && (
                 <div className="spun-result-wrap">
-                    <div className="spun-result" style={{ backgroundColor: spunColor }}>
-                        You got: <strong>{spunYarn}!</strong>
+                    <div className="spun-result" style={{ backgroundColor: activeColor }}>
+                        You got: <strong>{activeYarn}!</strong>
+                    </div>
+                </div>
+            )}
+
+            {/* ── PAST RESULTS ── */}
+            {pastPills.length > 0 && (
+                <div className="past-results-wrap">
+                    <div className="past-results">
+                        <span className="past-label">Past spins:</span>
+                        {pastPills.map((h) => (
+                            <button
+                                key={h.yarn}
+                                className="past-pill"
+                                style={{ backgroundColor: h.color }}
+                                onClick={() => loadYarn(h.yarn, h.color)}
+                            >
+                                {h.yarn}
+                            </button>
+                        ))}
                     </div>
                 </div>
             )}
 
             {/* ── QUIZ + LEARN MORE ── */}
-            {spunYarn && (
+            {activeYarn && (
                 <div className="results-section">
                     <div className="mg-card">
-                        <p className="card-label">Quiz Time on {spunYarn}</p>
-                        <Quiz yarn={spunYarn} />
+                        <p className="card-label">Quiz Time on {activeYarn}</p>
+                        <Quiz yarn={activeYarn} resetKey={quizResetKey} />
                     </div>
                     <div className="mg-card">
-                        <LearnMore yarn={spunYarn} />
+                        <LearnMore yarn={activeYarn} collapseKey={collapseKey} />
                     </div>
                 </div>
             )}
