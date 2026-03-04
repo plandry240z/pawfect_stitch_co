@@ -1,6 +1,7 @@
 nav{
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     background-color: white;
     padding: 10px;
     position: sticky;
@@ -11,23 +12,42 @@ nav{
     display: flex;
     gap: 20px;
     background-color: white;
-    padding: 10px;
 }
 
 .nav-links a {
     text-decoration: none;
     color: black;
+    padding:5px 10px;
+    border:5px solid transparent;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .active-home, .nav-links a:nth-child(1):hover {
-    color: var(--tan)!important;
+    border-color: var(--tan)!important;
+    border: 5px solid var(--tan)!important;
+    border-radius: 10px;
 }
 .active-stitch, .nav-links a:nth-child(2):hover {
-    color: var(--pink)!important   ;
+    border-color: var(--pink)!important;
+    border: 5px solid var(--pink)!important;
+    border-radius: 10px;
 }
-.active-minigame, .nav-links a:nth-child(3):hover {
-    color: var(--purple)!important;
+.active-minigame, .nav-links a:nth-child(4):hover {
+    border-color: var(--purple)!important;
+    border: 5px solid var(--purple)!important;
+    border-radius: 10px;
 }
-.active-upcycle, .nav-links a:nth-child(4):hover {
-    color: var(--blue)!important;
+.active-upcycle, .nav-links a:nth-child(3):hover {
+    border-color: var(--blue)!important;
+    border: 5px solid var(--blue)!important;
+    border-radius: 10px;
+}
+
+nav a:first-child {
+    margin-right: auto;
+}
+.paw-logo {
+    height: 50px;
+    margin-right: auto;
 }

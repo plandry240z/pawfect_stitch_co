@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap');
+
+
 /*for styling */
 :root {
   --bg: #fdfdfd;
@@ -10,6 +12,14 @@
   --text-mid: #444;
   --text-light: #777;
 }
+body{
+  cursor:url('/close_paw.png'), auto;
+}
+
+a,button,[onClick]{
+  cursor: url('/open_paw.png'), pointer;
+}
+
 
 body ,button{
   color: var(--text-dark);
