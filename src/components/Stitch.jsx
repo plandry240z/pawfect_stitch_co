@@ -1,14 +1,13 @@
 import { useState } from "react";
-import "../index.css";
 import "../css/stich.css";
-import cat from "../images/hook_cat.png";
+import kat from "../images/hook_cat.png";
 const stitches = [
     {
         id: "How-to-Read-Pattern",
         label: "How to Read A Pattern",
-        abbreviation: "N/A",
-        example: "N/A",
-        translation: "N/A",
+        abbreviation: null,
+        example: "Reading a pattern is like learning a new language. Check out this video to learn more!",
+        translation: null,
         video: "https://www.youtube.com/embed/PZ8uV2-Z-Qg?si=OZdNYDzC8IrY-039"
 
     },
@@ -94,22 +93,31 @@ function StitchCard ({stitch}) {
             <div className="card-header">
                 <h1>{stitch.label}</h1>
             </div>
+
+            {stitch.abbreviation && (
             <span className="abbr">{stitch.abbreviation}</span>
+            )}
+
+            {stitch.example && (
             <div className="cardrow">
                 <span className="cardlabel">Example</span>
                 <p className="cardvalue code">{stitch.example}</p>
             </div>
+            )}
 
+            {stitch.translation && (
             <div className="cardrow">
                 <span className="cardlabel">Translation</span>
                 <p className="cardvalue code">{stitch.translation}</p>
             </div>
+            )}
+
             {stitch.video &&(
             <div className = "cardrow">
                 <span className ="cardlabel">Video</span>
                 <iframe className = "cardvideo" src={stitch.video} allowFullScreen />
             </div>
-        )}
+            )}
     </section>
     );
 }
@@ -140,8 +148,8 @@ export default function StitchesPage(){
                         <StitchCard key = {stitch.id} stitch = {stitch} /> //same thing as before but always makes the squares for the info
                 ))}
             </main>
-            <aside className="cat">
-            <img src={cat} alt="cat" />
+            <aside className="kitty">
+            <img src={kat} alt="cat" />
             </aside>
         </div>
     );

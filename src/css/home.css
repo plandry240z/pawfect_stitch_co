@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap'); */
 
 :root {
   --bg: #fdfdfd;
@@ -75,7 +75,7 @@ body {
 }
 
 .welcome-title {
-  font-family: 'Playfair Display', 'serif';
+  font-family: 'chalk';
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.15;
@@ -129,7 +129,7 @@ body {
   border: none;
   padding: 0.85rem 2.2rem;
   border-radius: 999px;
-  font-family: 'Nunito', sans-serif;
+ 
   font-weight: 800;
   font-size: 0.95rem;
   cursor: pointer;
@@ -240,7 +240,7 @@ body {
 }
 
 .hero-title {
-  font-family: 'Playfair Display', 'serif';
+  font-family: 'chalk';
   font-size: clamp(2.8rem, 5vw, 4.5rem);
   line-height: 1.08;
   font-weight: 700;
@@ -324,7 +324,7 @@ body {
 }
 
 .section-title {
-  font-family: 'Playfair Display', 'serif';
+  font-family: 'chalk';
   font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 700;
   line-height: 1.15;

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../css/home.css';
-import "../index.css";
 import gray_cat from "../images/gray_cat.png";
 import pink_yarn from "../images/pink_yarn.png";
 import { Link } from 'react-router-dom';
@@ -66,8 +65,7 @@ export default function HomePage() {
         <div className="hero-text">
           <p className="hero-eyebrow">🐾 Crochet with purpose</p>
           <h1 className="hero-title">
-            Stitch by stitch,<br />
-            <em>sustainably.</em>
+            Stitch by stitch,<br />sustainably.
           </h1>
           <p className="hero-subtitle">
             Follow along crochet stitch tutorials, 
