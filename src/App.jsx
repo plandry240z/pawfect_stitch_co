@@ -1,24 +1,25 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Stitch from './components/Stitch';
-import Upcycle from './components/Upcycle'; 
+import Upcycle from './components/Upcycle';
 import Minigame from './components/minigame';
 import NavBar from './components/NavBar';
 import Footer from './components/footer';
+import './index.css';
 
-function App(){
+function App() {
   return (
     <Router>
       <NavBar />
       <Routes>
-        <Route path='/' element={<Home />} /> 
-        <Route path='/home' element={<Home />} /> 
+        <Route path='/' element={<Home />} />
+        <Route path='/home' element={<Home />} />
         <Route path='/stitch' element={<Stitch />} />
         <Route path='/upcycle' element={<Upcycle />} />
         <Route path='/minigame' element={<Minigame />} />
         <Route path='/footer' element={<Footer />} />
       </Routes>
-        <Footer />
+      <Footer />
     </Router>
   )
 }

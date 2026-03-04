@@ -1,4 +1,3 @@
-import "../index.css";
 import "../css/upcycle.css";
 import plarn_cat from "../images/plarn_cat.png";
 import tshirt_cat from "../images/tshirt_cat.png";

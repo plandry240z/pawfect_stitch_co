@@ -20,7 +20,7 @@ body ,button{
 }
 
 h1{
-  font-family: 'Playfair Display', serif;
+  font-family: 'chalk';
 }
 
 h2 {
@@ -28,6 +28,13 @@ h2 {
   letter-spacing: 3px;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
+}
+
+@font-face {
+  font-family: 'Chalk';
+  src: url('./fonts/Chalk.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* background-color: var(--accent-background); <-- example on how to use global color*/

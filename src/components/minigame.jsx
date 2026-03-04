@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import "../index.css";
 import "../css/minigame.css";
 import glasses_cat from "../images/glasses_cat.png";
 
