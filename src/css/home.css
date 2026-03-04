@@ -432,13 +432,25 @@ body {
   cursor: pointer;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
 }
+.sustain-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.09);
+  border-color: var(--pink);
+}
+
+.sustain-card:nth-child(2):hover {
+  border-color: var(--blue);
+}
+
 .sustain-card:visited,
 .sustain-card:active {
   color: inherit; 
 }
 
 .sustain-card h3 { 
+  font-family: 'chalk';
   font-size: 1.05rem; 
   font-weight: 800; 
   margin-bottom: 0.75rem; 
