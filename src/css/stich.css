@@ -13,16 +13,19 @@
 
 .sidenav-sticky {
     position: sticky;
-    top: 5rem;
+    top: 77px;
 }
 
 
 .title {
     text-align: center;
-    margin-top: 5px;
+    font-family: 'chalk';
+    padding: 0;
+    padding-top: 1rem;
+    letter-spacing: normal;
 }
 
-.navButton{
+.navButton {
     background-color: var(--bg);
     border-radius: 2rem;
     border: 2px solid var(--pink);
@@ -57,26 +60,30 @@
 
 }
 
-.cat {
+.kitty {
     width: 14rem;
     padding: 2rem 1rem;
     position: sticky;
-    top: 5rem;
+    top: rem;
     align-self: flex-start;
-}
-.cat img{
-    width: 100%;
-    height: auto;
+
 }
 
-.main{
-    width: calc(100% - 16rem - 14rem);;
+.kitty img {
+    width: 100%;
+    height: auto;
+    background-color: var(--bg);
+}
+
+.main {
+    width: calc(100% - 16rem - 14rem);
+    ;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    padding-right:0;
+    padding-right: 0;
 }
 
 .stitchCard {
@@ -87,7 +94,7 @@
     flex-direction: column;
     margin: 3rem auto;
     justify-content: space-between;
-    width:100%;
+    width: 100%;
     max-width: 700px;
     height: auto;
     background-color: var(--bg);
@@ -108,36 +115,35 @@
     opacity: 0.18;
 }
 
-.stitchCard:nth-child(odd)  { --card-blob: var(--pink); }
+.stitchCard:nth-child(odd) {
+    --card-blob: var(--pink);
+}
 
-.stitchCard:nth-child(even) { --card-blob: var(--blue); }
+.stitchCard:nth-child(even) {
+    --card-blob: var(--blue);
+}
 
-.stitchCard p{
+.stitchCard p {
     font-size: 0.95rem;
     line-height: 1.15;
     letter-spacing: -0.5px;
     margin-bottom: 0.8rem;
 }
 
-.stitchCard h1{
-    font-family: 'Nunito', sans-serif;
+.stitchCard h1 {
+    font-family: 'chalk';
     font-weight: 800;
     font-size: 1.5rem;
     margin-bottom: 1.2rem;
 }
 
-.stitchCard h2{
-    font-family: 'Nunito', sans-serif;
-    font-size: 1rem;
-    margin-bottom: 0.8rem;
-}
 .abbr {
     padding: 0.3rem 0.9rem;
     border-radius: 1rem;
     font-size: 0.75rem;
     font-weight: 900;
     letter-spacing: 0.5px;
-    background: rgba(236,192,207,0.3);
+    background: rgba(236, 192, 207, 0.3);
     color: #bb788d;
     max-width: 5rem;
     text-align: center;
@@ -145,7 +151,7 @@
 }
 
 .stitchCard:nth-child(even) .abbr {
-    background: rgba(181,199,235,0.35);
+    background: rgba(181, 199, 235, 0.35);
     color: #4a6fa5;
 }
 
@@ -176,12 +182,12 @@
 
 .cardvalue.code {
     font-size: 0.9rem;
-    background: rgba(236,192,207,0.12);
+    background: rgba(236, 192, 207, 0.12);
     border-left: 3px solid var(--pink);
 }
 
 .stitchCard:nth-child(even) .card-value.code {
-    background: rgba(181,199,235,0.15);
+    background: rgba(181, 199, 235, 0.15);
     border-left-color: var(--blue);
 }
 
@@ -193,5 +199,43 @@
     margin-top: 0.5rem;
     display: block;
     margin-left: auto;
-    margin-right: auto; 
+    margin-right: auto;
+}
+
+
+@media (max-width: 860px) {
+    .page {
+        flex-direction: column;
+    }
+
+    .sidenav {
+        width: 100%;
+        border-right: none;
+    }
+
+    .sidenav-sticky {
+        position: sticky;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        padding: 1rem;
+        z-axis: 
+    }
+
+    .navButton {
+        width: auto;
+        margin: 0;
+    }
+
+    .main {
+        width: 100%;
+        padding: 2rem 1.25rem;
+    }
+
+    .kitty {
+        display: none;
+    }
+
 }

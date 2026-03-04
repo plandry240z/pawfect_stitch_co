@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../css/home.css';
-import "../index.css";
 import gray_cat from "../images/gray_cat.png";
 import pink_yarn from "../images/pink_yarn.png";
 import { Link } from 'react-router-dom';
@@ -66,8 +65,7 @@ export default function HomePage() {
         <div className="hero-text">
           <p className="hero-eyebrow">🐾 Crochet with purpose</p>
           <h1 className="hero-title">
-            Stitch by stitch,<br />
-            <em>sustainably.</em>
+            Stitch by stitch,<br />sustainably.
           </h1>
           <p className="hero-subtitle">
             Follow along crochet stitch tutorials, 
@@ -75,14 +73,57 @@ export default function HomePage() {
             and play a yarn roulette game to test your knowledge on different materials.
           </p>
           <div className="hero-buttons">
-            <Link to="/stitch" className="btn-primary">Explore Patterns</Link>
-            <a href="#about" className="btn-secondary">Learn More</a>
+            <a href="#about" className="btn-primary">About Us</a>
+            <a href="#get-started" className="btn-secondary">Learn More</a>
           </div>
         </div>
         <div className="hero-illustration">
           <img src={gray_cat} alt="gray cat"/>
         </div>
         <div className="hero-circle-tan"></div>
+        <a href="#get-started" className="scroll-hint" aria-label="Scroll down for more">
+          <span className="scroll-hint-text">Scroll to explore</span>
+          <span className="scroll-hint-arrow">↓</span>
+        </a>
+      </section>
+
+      {/* get started guide */}
+      <section className="get-started-section" id="get-started">
+        <div className="get-started-inner">
+          <h1 className="section-title">Get Started Guide</h1>
+          <p className="get-started-intro">
+            Here's a quick guide to everything Pawfect Stitch Co. has to offer
+          </p>
+          <div className="get-started-grid">
+            {[
+              {
+                page: 'Stitch',
+                title: 'Learn Crochet Stitches',
+                desc: 'Browse stitch tutorials — each card breaks down the abbreviation, shows a pattern example, translation into plain English, and links to a video walkthrough. Perfect for beginners.',
+                link: '/stitch',
+              },
+              {
+                page: 'Upcycle',
+                title: 'Upcycle Materials into Yarn',
+                desc: 'Discover how to turn plastic bags into plarn, old t-shirts into t-shirt yarn, and leftover projects into fresh material. Every card links to a video tutorial and a resource guide.',
+                link: '/upcycle',
+              },
+              {
+                page: 'Minigame',
+                title: 'Play Yarn Roulette',
+                desc: 'Spin the wheel to land on a random yarn type, then answer a short quiz to test your knowledge on it. Expand the Learn More section to dig deeper after each spin.',
+                link: '/minigame',
+              },
+            ].map((item, i) => (
+              <Link to={item.link} className="gs-card" key={i} onClick={() => window.scrollTo(0,0)}>
+                <span className="gs-page-label">{item.page}</span>
+                <h3 className="gs-title">{item.title}</h3>
+                <p className="gs-desc">{item.desc}</p>
+                <span className="gs-cta">Go to {item.page} →</span>
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* about section */}
@@ -129,19 +170,26 @@ export default function HomePage() {
                 tagLabel: 'Upcycling',
                 title: 'Rescuing Textiles from Landfill',
                 desc: "Our tutorials show you how to turn thrifted knitwear back into usable yarn, cut old t-shirts into continuous strips, and even crochet plastic bags into durable grocery totes or cleaning rags.",
+                link: '/upcycle',
               },
               {
                 tag: 'tag-blue',
                 tagLabel: 'Natural Fibers',
                 title: 'No Plastic Yarn.',
                 desc: "Polyester and acrylic yarns shed microplastics with every wash. We recommend wool, cotton, linen, bamboo, and recycled fiber options that are better for your skin and the planet.",
+                link: '/minigame',
               },
             ].map((c, i) => (
-              <div className="sustain-card" key={i}>
+              <Link
+                to={c.link}
+                key={i}
+                className="sustain-card"
+                onClick={() => window.scrollTo(0,0)}
+              >
                 <h3>{c.title}</h3>
                 <p>{c.desc}</p>
-                <span className={`sustain-tag ${c.tag}`}>{c.tagLabel}</span>
-              </div>
+                <span className={'sustain-tag ${c.tag}'}>{c.tagLabel} →</span>
+              </Link>
             ))}
           </div>
         </div>
