@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../css/stich.css";
-import kat from "../images/hook_cat.png";
+import kat from "../images/green_cat.png";
+import ball from "../images/pink_yarn.png";
 const stitches = [
     {
         id: "How-to-Read-Pattern",
@@ -149,7 +150,8 @@ export default function StitchesPage(){
                 ))}
             </main>
             <aside className="kitty">
-            <img src={kat} alt="cat" />
+                <img className="pinkBall"src ={ball} alt="yarn" />
+                <img src={kat} alt="cat" />
             </aside>
         </div>
     );
