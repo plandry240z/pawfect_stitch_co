@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from "react";
 import "../css/minigame.css";
 import glasses_cat from "../images/glasses_cat.png";
 
@@ -89,7 +89,7 @@ const Q2_OPTIONS = ["Yes", "No", "Depends"];
 const Q3_OPTIONS = ["Plants", "Animals", "Plastic", "Recycled materials"];
 
 // ─── SPIN WHEEL ───────────────────────────────────────────────────────────────
-function SpinWheel({ onResult, spinTrigger, dimmed }) {
+const SpinWheel = forwardRef(function SpinWheel({ onResult, dimmed }, ref) {
     const canvasRef    = useRef(null);
     const animRef      = useRef(null);
     const currentAngle = useRef(0);
@@ -172,41 +172,39 @@ function SpinWheel({ onResult, spinTrigger, dimmed }) {
         canvas.style.width  = LOGICAL + "px";
         canvas.style.height = LOGICAL + "px";
         draw(0);
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    useEffect(() => {
-        if (spinTrigger > 0) spin();
-    }, [spinTrigger]);
+    useImperativeHandle(ref, () => ({
+        spin: () => {
+            if (spinning) return;
+            setSpinning(true);
 
-    const spin = () => {
-        if (spinning) return;
-        setSpinning(true);
+            const extra      = 5 * 2 * Math.PI + Math.random() * 2 * Math.PI;
+            const duration   = 3600;
+            const startTime  = performance.now();
+            const startAngle = currentAngle.current;
+            const easeOut    = (t) => 1 - Math.pow(1 - t, 4);
 
-        const extra      = 5 * 2 * Math.PI + Math.random() * 2 * Math.PI;
-        const duration   = 3600;
-        const startTime  = performance.now();
-        const startAngle = currentAngle.current;
-        const easeOut    = (t) => 1 - Math.pow(1 - t, 4);
+            const step = (now) => {
+                const t       = Math.min((now - startTime) / duration, 1);
+                const current = startAngle + extra * easeOut(t);
+                currentAngle.current = current;
+                draw(current);
 
-        const step = (now) => {
-            const t       = Math.min((now - startTime) / duration, 1);
-            const current = startAngle + extra * easeOut(t);
-            currentAngle.current = current;
-            draw(current);
+                if (t < 1) {
+                    animRef.current = requestAnimationFrame(step);
+                } else {
+                    setSpinning(false);
+                    const norm   = ((current % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+                    const pAngle = (2 * Math.PI - norm + Math.PI * 1.5) % (2 * Math.PI);
+                    const idx    = Math.floor(pAngle / ARC) % YARN_NAMES.length;
+                    onResult(YARN_NAMES[idx], YARN_COLORS[idx]);
+                }
+            };
 
-            if (t < 1) {
-                animRef.current = requestAnimationFrame(step);
-            } else {
-                setSpinning(false);
-                const norm   = ((current % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-                const pAngle = (2 * Math.PI - norm + Math.PI * 1.5) % (2 * Math.PI);
-                const idx    = Math.floor(pAngle / ARC) % YARN_NAMES.length;
-                onResult(YARN_NAMES[idx], YARN_COLORS[idx]);
-            }
-        };
-
-        animRef.current = requestAnimationFrame(step);
-    };
+            animRef.current = requestAnimationFrame(step);
+        }
+    }), [spinning]);
 
     return (
         <div className={`wheel-wrap${dimmed ? " wheel-dimmed" : ""}`}>
@@ -214,16 +212,16 @@ function SpinWheel({ onResult, spinTrigger, dimmed }) {
             <canvas ref={canvasRef} className="wheel-canvas" />
         </div>
     );
-}
+});
 
 // ─── QUIZ ─────────────────────────────────────────────────────────────────────
-function Quiz({ yarn, resetKey }) {
+function Quiz({ yarn, onReset }) {
     const data = YARNS[yarn];
     const [answers, setAnswers] = useState([null, null, null]);
     const allAnswered = answers.every((a) => a !== null);
 
     // Reset whenever yarn changes or resetKey bumps
-    useEffect(() => { setAnswers([null, null, null]); }, [yarn, resetKey]);
+    // useEffect(() => { setAnswers([null, null, null]); }, [yarn, resetKey]);
 
     const correct = [
         data.type,
@@ -278,10 +276,7 @@ function Quiz({ yarn, resetKey }) {
                 </div>
             ))}
             {allAnswered && (
-                <button
-                    className="reset-quiz-btn"
-                    onClick={() => setAnswers([null, null, null])}
-                >
+                <button className="reset-quiz-btn" onClick={onReset}>
                     ↺ Try again
                 </button>
             )}
@@ -303,14 +298,15 @@ function AccordionItem({ title, colorClass, open, onToggle, children }) {
 }
 
 // ─── LEARN MORE ───────────────────────────────────────────────────────────────
-function LearnMore({ yarn, collapseKey }) {
+function LearnMore({ yarn }) {
     const data = YARNS[yarn];
-    const [openIdx, setOpenIdx] = useState(null);
+    const [openIdxs, setOpenIdxs] = useState(new Set());
 
-    // Collapse all whenever yarn changes or collapseKey bumps
-    useEffect(() => { setOpenIdx(null); }, [yarn, collapseKey]);
-
-    const toggle = (idx) => setOpenIdx((prev) => (prev === idx ? null : idx));
+    const toggle = (idx) => setOpenIdxs((prev) => {
+        const next = new Set(prev);
+        next.has(idx) ? next.delete(idx) : next.add(idx);
+        return next;
+    });
 
     const sections = [
         {
@@ -347,7 +343,7 @@ function LearnMore({ yarn, collapseKey }) {
                     key={s.title}
                     title={s.title}
                     colorClass={s.colorClass}
-                    open={openIdx === i}
+                    open={openIdxs.has(i)}
                     onToggle={() => toggle(i)}
                 >
                     {s.content}
@@ -362,9 +358,8 @@ function Minigame() {
     const [activeYarn,   setActiveYarn]   = useState(null);
     const [activeColor,  setActiveColor]  = useState(null);
     const [spinning,     setSpinning]     = useState(false);
-    const [spinTrigger,  setSpinTrigger]  = useState(0);
-    const [collapseKey,  setCollapseKey]  = useState(0);  // bumped to collapse accordions
-    const [quizResetKey, setQuizResetKey] = useState(0);  // bumped to reset quiz
+    const wheelRef = useRef(null);
+    const [quizKey, setQuizKey] = useState(0);
     const [history,      setHistory]      = useState([]); // [{ yarn, color }, ...]
     const [isManualMode, setIsManualMode] = useState(false);
     const [selectedManual, setSelectedManual] = useState(null);
@@ -373,8 +368,7 @@ function Minigame() {
     const loadYarn = (yarn, color) => {
         setActiveYarn(yarn);
         setActiveColor(color);
-        setCollapseKey((k) => k + 1);
-        setQuizResetKey((k) => k + 1);
+        setQuizKey(0);
     };
 
     // ── called when the wheel finishes spinning ──
@@ -390,8 +384,7 @@ function Minigame() {
     const handleSpinClick = () => {
         if (spinning) return;
         setSpinning(true);
-        setCollapseKey((k) => k + 1);
-        setSpinTrigger((t) => t + 1);
+        wheelRef.current.spin();
     };
 
     // ── manual mode ──
@@ -447,16 +440,16 @@ function Minigame() {
                             ))}
                         </div>
                     )}
-                    <div className="scroll-hint">
-                        <span className="scroll-hint-text">Scroll down for more</span>
-                        <span className="scroll-hint-arrow">↓</span>
+                    <div className="scroll-hint2">
+                        <span className="scroll-hint-text2">Scroll down for more</span>
+                        <span className="scroll-hint-arrow2">↓</span>
                     </div>
                 </div>
 
                 <div className="wheel-col">
                     <SpinWheel
+                        ref={wheelRef}
                         onResult={handleSpinResult}
-                        spinTrigger={spinTrigger}
                         dimmed={isManualMode}
                     />
                     {!isManualMode && (
@@ -504,10 +497,10 @@ function Minigame() {
                 <div className="results-section">
                     <div className="mg-card">
                         <p className="card-label">Quiz Time on {activeYarn}</p>
-                        <Quiz yarn={activeYarn} resetKey={quizResetKey} />
+                        <Quiz key={`${activeYarn}-${quizKey}`} yarn={activeYarn} onReset={() => setQuizKey((k) => k + 1)} />
                     </div>
                     <div className="mg-card">
-                        <LearnMore yarn={activeYarn} collapseKey={collapseKey} />
+                        <LearnMore key={activeYarn} yarn={activeYarn} />
                     </div>
                 </div>
             )}

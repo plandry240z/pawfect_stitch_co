@@ -14,6 +14,7 @@ const NavBar = () => {
                 <NavLink to='/stitch'className={({ isActive }) => isActive ?'active-stitch' : '' }>Stitch</NavLink>
                 <NavLink to='/upcycle'className={({ isActive }) => isActive ?'active-upcycle' : '' }>Upcycle</NavLink>
                 <NavLink to='/minigame'className={({ isActive }) => isActive ?'active-minigame' : '' }>Minigame</NavLink>
+                <NavLink to='/login'className={({ isActive }) => isActive ?'active-profile' : '' }>Sign In</NavLink>
             </div>
         </nav>
     );

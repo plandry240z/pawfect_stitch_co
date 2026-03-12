@@ -6,6 +6,7 @@ import Upcycle from './components/Upcycle';
 import Minigame from './components/minigame';
 import NavBar from './components/NavBar';
 import Footer from './components/footer';
+import Login from './components/login';
 import './index.css';
 
 function ScrolltoTopOnMount() {
@@ -23,11 +24,12 @@ function App(){
       <NavBar />
       <ScrolltoTopOnMount />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Login />} />
         <Route path='/home' element={<Home />} />
         <Route path='/stitch' element={<Stitch />} />
         <Route path='/minigame' element={<Minigame />} />
         <Route path='/upcycle' element={<Upcycle />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
       <Footer />
     </Router>
