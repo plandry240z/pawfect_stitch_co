@@ -150,6 +150,9 @@ export default function StitchesPage(){
             </main>
             <aside className="kitty">
             <img src={kat} alt="cat" />
+            <img src={kat} alt="cat" />
+            <img src={kat} alt="cat" />
+
             </aside>
         </div>
     );
