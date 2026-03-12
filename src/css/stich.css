@@ -62,17 +62,22 @@
 
 .kitty {
     width: 14rem;
-    padding: 2rem 1rem;
-    position: sticky;
-    top: rem;
-    align-self: flex-start;
-
+    padding: 0;
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    z-index: 1;
 }
 
 .kitty img {
     width: 100%;
     height: auto;
-    background-color: var(--bg);
+    background-color: transparent;
+    margin-left: 1.5rem;
+}
+
+.pinkBall {
+    padding-bottom: 5rem;
 }
 
 .main {
