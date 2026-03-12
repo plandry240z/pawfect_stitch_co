@@ -162,7 +162,7 @@
 }
 
 /* ─── SCROLL HINT ────────────────────────────────────────────────────────── */
-.scroll-hint {
+.scroll-hint2 {
     position: absolute;
     bottom: 0.5rem;
     left: 85%;
@@ -176,14 +176,14 @@
     /* z-index: 2; */
 }
 
-.scroll-hint-text {
+.scroll-hint-text2 {
     font-size: 0.7rem;
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
 
-.scroll-hint-arrow {
+.scroll-hint-arrow2 {
     font-size: 1.2rem;
 }
 
